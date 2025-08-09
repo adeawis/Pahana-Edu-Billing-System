@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahana Edu Bookshop - Admin Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .bg-decoration {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .book-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .graduation-cap {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            top: 70%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .pencil {
+            width: 40px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* ensures image stays inside shape */
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* fills area without distortion */
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 65%;
+            transform: translateY(-50%);
+            color: #bdc3c7;
+            transition: color 0.3s ease;
+        }
+
+        .form-input:focus + .input-icon {
+            color: #667eea;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7f8c8d;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #764ba2;
+        }
+
+        /* Success state */
+        .form-input.valid {
+            border-color: #27ae60;
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        .form-input.invalid {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 20px;
+                padding: 40px 30px;
+            }
+            
+            .company-name {
+                font-size: 24px;
+            }
+        }
+
+        /* Loading state */
+        .login-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .login-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorations -->
+    <div class="bg-decoration book-icon"></div>
+    <div class="bg-decoration graduation-cap"></div>
+    <div class="bg-decoration pencil"></div>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="Pahana Edu Logo">
+            </div>
+            <h1 class="company-name">PAHANA EDU</h1>
+            <p class="subtitle">Admin Dashboard | Billing System</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-input" required>
+                <span class="input-icon">👤</span>
+                <div class="error-message" id="usernameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" required>
+                <span class="input-icon">🔒</span>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember">
+                    Remember me
+                </label>
+                <a href="#" onclick="openDemoPopup()" style="color: #667eea; font-weight: 500;">Show Demo Credentials</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login to Dashboard</button>
+        </form>
+    </div>
+
+    
+    <!-- Demo Credentials Modal -->
+<div id="demoModal" style="
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    z-index: 999;
+    display: none;
+    max-width: 90%;
+    width: 350px;
+    text-align: center;
+">
+    <h3 style="margin-bottom: 20px; color: #2c3e50;">Demo Credentials</h3>
+    <p>
+        <strong>Username:</strong><br>
+        <code id="demoUser">pahanaedu@admin</code>
+        <button onclick="copyToClipboard('demoUser')" style="margin-left: 10px;">📋</button>
+    </p>
+    <p style="margin-top: 15px;">
+        <strong>Password:</strong><br>
+        <code id="demoPass">admin123</code>
+        <button onclick="copyToClipboard('demoPass')" style="margin-left: 10px;">📋</button>
+    </p>
+    <button onclick="closeDemoPopup()" style="
+        margin-top: 25px;
+        background-color: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+    ">Close</button>
+</div>
+<div id="overlay" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;">        
+</div>
+
+
+    <script>
+    const form = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.querySelector('.login-btn');
+
+    const ADMIN_USERNAME = 'pahanaedu@admin';
+    const ADMIN_PASSWORD = 'admin123';
+
+    function validateUsername(username) {
+        if (!username.trim()) {
+            return 'Username is required';
+        }
+        return null;
+    }
+
+    function validatePassword(password) {
+        if (!password) {
+            return 'Password is required';
+        }
+        return null;
+    }
+
+    function showError(inputElement, errorElement, message) {
+        inputElement.classList.add('invalid');
+        inputElement.classList.remove('valid');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+
+    function showSuccess(inputElement, errorElement) {
+        inputElement.classList.add('valid');
+        inputElement.classList.remove('invalid');
+        errorElement.style.display = 'none';
+    }
+
+    function clearValidation(inputElement, errorElement) {
+        inputElement.classList.remove('valid', 'invalid');
+        errorElement.style.display = 'none';
+    }
+
+    usernameInput.addEventListener('input', function () {
+        const error = validateUsername(this.value);
+        const errorElement = document.getElementById('usernameError');
+        if (error) {
+            showError(this, errorElement, error);
+        } else {
+            showSuccess(this, errorElement);
+        }
+    });
+
+    passwordInput.addEventListener('input', function () {
+        const error = validatePassword(this.value);
+        const errorElement = document.getElementById('passwordError');
+        if (error) {
+            showError(this, errorElement, error);
+        } else {
+            showSuccess(this, errorElement);
+        }
+    });
+
+    usernameInput.addEventListener('focus', function () {
+        if (!this.classList.contains('valid')) {
+            clearValidation(this, document.getElementById('usernameError'));
+        }
+    });
+
+    passwordInput.addEventListener('focus', function () {
+        if (!this.classList.contains('valid')) {
+            clearValidation(this, document.getElementById('passwordError'));
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        const usernameError = validateUsername(username);
+        const passwordError = validatePassword(password);
+
+        if (usernameError) {
+            showError(usernameInput, document.getElementById('usernameError'), usernameError);
+        }
+
+        if (passwordError) {
+            showError(passwordInput, document.getElementById('passwordError'), passwordError);
+        }
+
+        if (!usernameError && !passwordError) {
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                loginBtn.classList.add('loading');
+                loginBtn.textContent = '';
+
+                setTimeout(() => {
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Login to Dashboard';
+                    window.location.href = 'admin_dashboard.html'; // Redirect after login
+                }, 1000);
+
+            } else {
+                showError(passwordInput, document.getElementById('passwordError'), 'Incorrect username or password');
+            }
+        }
+    });
+    
+    
+    function openDemoPopup() {
+    document.getElementById('demoModal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closeDemoPopup() {
+    document.getElementById('demoModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function copyToClipboard(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    });
+}
+
+    
+    
+</script>
+
+</body>
+</html>
+
+
+

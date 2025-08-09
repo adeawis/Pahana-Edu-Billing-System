@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+<head>
+    <title>View All Bills - Pahana Edu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .main-content {
+            padding: 30px;
+            flex: 1;
+        }
+
+        .card-custom {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .btn-custom:hover {
+            background: linear-gradient(45deg, #5a67d8, #6b46c1);
+            color: white;
+        }
+
+        table {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .table-container {
+            max-height: 750px; /* or whatever height fits your design */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        /* Optional: to keep the table header fixed while scrolling */
+        .table-container thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            z-index: 1;
+        }
+        
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+
+        .logo {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            max-width: 100px;   /* control the image width */
+            height: auto;       /* maintain aspect ratio */
+            display: block;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-item {
+            margin: 8px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            transform: scaleY(1);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            opacity: 0.8;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .header h2 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+    <div class="sidebar">
+            <div class="logo">
+                 <img src="images/logo.jpg" alt="Pahana Edu Logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="admin_dashboard.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="customer_management.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                        </svg>
+                        Customer Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="item_management.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                        </svg>
+                        Item Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="billing_management.html" class="nav-link active" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Billing Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="help_desk.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                        Help Desk
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 01-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                        </svg>
+                        Exit
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    <div class="main-content">
+        <div class="header-bar">
+                <h2>View All Bills</h2><button class="btn btn-secondary" onclick="window.location.href='billing_management.html'">Back</button>
+            </div>
+
+        <!-- Customer Table -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5>Bill List</h5>
+            <button class="btn btn-primary" onclick="loadBills()">Refresh List</button>
+        </div>
+
+        <div class="table-container">
+        <div class="card-custom p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Bill Id</th>
+                        <th>Customer Name</th>
+                        <th>Bill Date</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="billsTableBody">
+                    <!-- bills load here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+    
+    
+<!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded-4">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Exit</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mb-0 fs-5">Are you sure you want to exit the system?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="index.html" class="btn btn-danger">Yes, Exit</a>
+      </div>
+    </div>
+  </div>
+</div>    
+
+
+<!-- View Bill Modal -->
+<div class="modal fade" id="viewBillModal" tabindex="-1" aria-labelledby="viewBillModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="viewBillModalLabel">Bill Details</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Bill ID:</strong> <span id="viewBillId"></span></p>
+        <p><strong>Customer Name:</strong> <span id="viewCustomerName"></span></p>
+        <p><strong>Total Amount:</strong> Rs. <span id="viewTotalAmount"></span></p>
+
+        <h6>Purchased Items:</h6>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Units Consumed</th>
+              <th>Price (Rs.)</th>
+              <th>Total (Rs.)</th>
+            </tr>
+          </thead>
+          <tbody id="viewItemsTableBody">
+            <!-- Items will be loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <script>
+// 🔄 Load all bills on page load
+document.addEventListener("DOMContentLoaded", loadBills);
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+
+    // Remove the [UTC] part if present
+    const cleaned = dateString.replace(/\[.*\]/g, '');
+    const date = new Date(cleaned);
+
+    if (isNaN(date.getTime())) return 'Invalid Date';
+
+    return date.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+}
+
+
+
+
+function loadBills() {
+    fetch("http://localhost:8080/PahanaEdu_Bookshop/api/bills")
+        .then(response => response.json())
+        .then(bills => {
+            const tbody = document.getElementById("billsTableBody");
+            tbody.innerHTML = "";
+            
+            const printedBills = JSON.parse(localStorage.getItem("printedBills")) || [];
+
+            bills.forEach(bill => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${bill.bill_id}</td>
+                    <td>${bill.customer_name || 'N/A'}</td>
+                    <td>${formatDate(bill.bill_date)}</td>
+                    <td>${bill.total_amount.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info" onclick="viewBill(${bill.bill_id})">View</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteBill(${bill.bill_id})">Delete</button>
+                        <button class="btn btn-sm btn-success" id="printBtn-${bill.bill_id}" onclick="printBill(${bill.bill_id})">Print</button>
+                    </td>
+                `;
+
+                tbody.appendChild(row);
+                
+                // Disable print button if bill was already printed
+                
+                if (printedBills.includes(bill.bill_id)) {
+                    setTimeout(() => {
+                    const btn = document.getElementById(`printBtn-${bill.bill_id}`);
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.innerText = "Printed";
+                        btn.classList.remove("btn-success");
+                        btn.classList.add("btn-secondary");
+                    }
+                }, 0); // wait for DOM to render the button
+              }
+
+            });
+        })
+        .catch(error => console.error("Error loading bills:", error));
+}
+
+    function viewBill(billId) {
+    fetch(`http://localhost:8080/PahanaEdu_Bookshop/api/bills/${billId}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to fetch bill details");
+            return response.json();
+        })
+        .then(bill => {
+            // Set modal details
+            document.getElementById("viewBillId").textContent = bill.bill_id;
+            document.getElementById("viewCustomerName").textContent = bill.customer_name || "N/A";
+            document.getElementById("viewTotalAmount").textContent = bill.total_amount.toFixed(2);
+
+            // Load items into table
+            const itemsTableBody = document.getElementById("viewItemsTableBody");
+            itemsTableBody.innerHTML = "";
+
+            if (bill.items && bill.items.length > 0) {
+                bill.items.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${item.item_Title || 'N/A'}</td>
+                        <td>${item.units_consumed || 0}</td>
+                        <td>Rs. ${item.price.toFixed(2)}</td>
+                        <td>Rs. ${(item.price * item.units_consumed).toFixed(2)}</td>
+                    `;
+                    itemsTableBody.appendChild(row);
+                });
+            } else {
+                itemsTableBody.innerHTML = `<tr><td colspan="4" class="text-center">No items found</td></tr>`;
+            }
+
+            // Show the modal
+            const viewBillModal = new bootstrap.Modal(document.getElementById('viewBillModal'));
+            viewBillModal.show();
+        })
+        .catch(error => {
+            console.error("Error fetching bill details:", error);
+            alert("Failed to load bill details.");
+        });
+}
+
+
+function deleteBill(billId) {
+    if (!confirm("Are you sure you want to delete this bill?")) return;
+
+    console.log("Attempting to delete bill ID:", billId);
+
+    fetch(`http://localhost:8080/PahanaEdu_Bookshop/api/bills/${billId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Bill deleted successfully!");
+            const row = document.querySelector(`button[onclick="deleteBill(${billId})"]`).closest('tr');
+            row.remove();
+        } else {
+            return response.json().then(err => {
+                throw new Error(err.error || "Failed to delete bill.");
+            });
+        }
+    })
+    .catch(error => {
+        console.error("Error deleting bill:", error);
+        alert("Failed to delete bill: " + error.message);
+    });
+}
+
+
+
+function printBill(billId) {
+    fetch('http://localhost:8080/PahanaEdu_Bookshop/api/bills')
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch bills');
+            return response.json();
+        })
+        .then(bills => {
+            // Find the bill with matching billId
+            const bill = bills.find(b => b.bill_id === billId);
+            if (!bill) {
+                alert('Bill not found!');
+                return;
+            }
+
+            const billDate = new Date(bill.bill_date.replace(/\[.*\]/g, '')).toLocaleDateString('en-GB');
+            const customerName = bill.customer_name || 'N/A';
+            const customerId = bill.customer_id || 'N/A';
+            const totalAmount = bill.total_amount || 0;
+
+            let itemsHTML = '';
+            if (bill.items && bill.items.length > 0) {
+                itemsHTML = bill.items.map(item => `
+                    <tr>
+                        <td>${item.item_Title || 'N/A'}</td>
+                        <td>${item.units_consumed || 0}</td>
+                        <td>Rs. ${item.price.toFixed(2)}</td>
+                        <td>Rs. ${(item.price * item.units_consumed).toFixed(2)}</td>
+                    </tr>
+                `).join('');
+            } else {
+                itemsHTML = `<tr><td colspan="4" style="text-align:center;">No items found</td></tr>`;
+            }
+
+            const printWindow = window.open('', '_blank', 'width=800,height=600');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Bill #${billId} - Pahana Edu Bookshop</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        h2, h3 { margin-bottom: 0; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                        .header { margin-bottom: 20px; }
+                        .total { font-weight: bold; font-size: 1.1em; }
+                        .thank-you {
+                            margin-top: 40px;
+                            text-align: center;
+                            font-style: italic;
+                            font-size: 16px;
+                            color: #444;
+                        }
+                        .footer {
+                            margin-top: 50px;
+                            font-size: 14px;
+                            color: #333;
+                            border-top: 1px solid #ccc;
+                            padding-top: 10px;
+                        }
+                        .footer p {
+                            margin: 5px 0;
+                            text-align: center;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h2>Pahana Edu Bookshop</h2>
+                        <h3>Bill ID: ${billId}</h3>
+                        <p><strong>Customer:</strong> ${customerName} (ID: ${customerId})</p>
+                        <p><strong>Date:</strong> ${billDate}</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Units</th>
+                                <th>Price (Rs.)</th>
+                                <th>Total (Rs.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itemsHTML}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="total">Grand Total</td>
+                                <td class="total">Rs. ${totalAmount.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="thank-you">
+                         Thank you for shopping at Pahana Edu Bookshop! <br> Visit again soon!
+                    </div>
+                    <div class="footer">
+                        <p><strong>Address:</strong> Pahana Edu Bookshop, <br> 24/B, Rahula Mawatha, Colombo 4</p>
+                        <p><strong>Telephone:</strong> 0113678422 / 0779393612</p>
+                        <p><em>We respect your privacy. All transaction details are kept confidential and secure.</em></p>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            // Save printed bill ID to localStorage
+            let printedBills = JSON.parse(localStorage.getItem("printedBills")) || [];
+            if (!printedBills.includes(billId)) {
+                printedBills.push(billId);
+                localStorage.setItem("printedBills", JSON.stringify(printedBills));
+            }
+
+            document.getElementById(`printBtn-${billId}`).disabled = true;
+            document.getElementById(`printBtn-${billId}`).innerText = "Printed";
+            // Disable the print button after printing
+            const printBtn = document.getElementById(`printBtn-${billId}`);
+            if (printBtn) {
+                printBtn.disabled = true;
+                printBtn.innerText = "Printed";
+                printBtn.classList.remove("btn-success");
+                printBtn.classList.add("btn-secondary");
+            }
+
+
+        })
+        .catch(error => {
+            console.error("Print failed:", error);
+            alert("Failed to fetch or print bill details.");
+        });
+}
+
+</script>
+
+
+    
+    
+    
+    </body>
+</html>

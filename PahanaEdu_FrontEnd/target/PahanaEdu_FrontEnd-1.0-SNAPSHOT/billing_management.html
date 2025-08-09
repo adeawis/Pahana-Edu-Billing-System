@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing Management - Pahana Edu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .logo {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            max-width: 100px;   /* control the image width */
+            height: auto;       /* maintain aspect ratio */
+            display: block;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-item {
+            margin: 8px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            transform: scaleY(1);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            opacity: 0.8;
+        }
+
+        
+
+        /* Main Content */
+        .main-content {
+            padding: 30px;
+            flex: 1;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .header h2 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+
+        
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        /* Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.single {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary-2{
+            background: green;
+            color: white;
+        }
+        .btn-primary-2:hover{
+            transform: translateY(-1px);
+            background: green;
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        /* Table */
+        .table-container {
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+        }
+
+        th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        tr:hover {
+            background-color: #f9fafb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Total Section */
+        .total-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            margin-top: 30px;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .total-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Submit Section */
+        .submit-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+                 <img src="images/logo.jpg" alt="Pahana Edu Logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="admin_dashboard.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="customer_management.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                        </svg>
+                        Customer Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="item_management.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                        </svg>
+                        Item Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Billing Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="help_desk.html" class="nav-link" onclick="setActive(this)">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                        Help Desk
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 01-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                        </svg>
+                        Exit
+                    </a>
+                </li>
+            </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header-bar">
+                <h2>Billing Management</h2>
+            </div>
+
+        <!-- Add Items to Bill Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Add / Update Bill</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customer_id">Select Customer</label>
+                        <select id="customer_id">
+                            <option disabled selected>Loading customers...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_id">Select Item</label>
+                        <select id="item_id">
+                            <option disabled selected>Loading items...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="units_consumed">Units Consumed</label>
+                        <input type="number" id="units_consumed" placeholder="Enter Quantity" oninput="calculateLineTotal()">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price (LKR)</label>
+                        <input type="number" id="price" placeholder="Enter Price" oninput="calculateLineTotal()">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="addToBill()">Add to Bill</button>
+                <button class="btn btn-primary-2" onclick="window.location.href='view_bills.html'">View All Bills</button>
+                <button class="btn btn-secondary" onclick="">Clear</button>
+            </div>
+        </div>
+
+        <!-- Bill Items Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Bill Items</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table id="bill_table">
+                        <thead>
+                            <tr>
+                                <th>Item ID</th>
+                                <th>Units</th>
+                                <th>Price</th>
+                                <th>Line Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bill_body">
+                            <!-- Dynamically inserted rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-section">
+                    <h3>Total Amount: LKR <span id="total_amount">0.00</span></h3>
+                </div>
+
+                <div class="submit-section">
+                    <button class="btn btn-primary" onclick="submitBill()">Submit Bill</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded-4">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Exit</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mb-0 fs-5">Are you sure you want to exit the system?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="index.html" class="btn btn-danger">Yes, Exit</a>
+      </div>
+    </div>
+  </div>
+</div>    
+    
+    
+<script>
+    
+    let allItems = [];
+    let allCustomers = [];
+
+    window.onload = function () {
+        fetchCustomers();
+        fetchItems();
+    };
+
+function fetchCustomers() {
+    fetch('http://localhost:8080/PahanaEdu_Bookshop/api/customers')
+        .then(response => response.json())
+        .then(customers => {
+            allCustomers = customers; // Store for later use
+            const customerSelect = document.getElementById("customer_id");
+            customerSelect.innerHTML = `<option disabled selected>Select Customer</option>`;
+            customers.forEach(c => {
+                const option = document.createElement("option");
+                option.value = c.customer_id;
+                option.textContent = `${c.name} (${c.telephone})`;
+                customerSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load customers", error);
+        });
+}
+
+function fetchItems() {
+    fetch('http://localhost:8080/PahanaEdu_Bookshop/api/items')
+        .then(response => response.json())
+        .then(items => {
+            allItems = items; // Store for later use
+            const itemSelect = document.getElementById("item_id");
+            itemSelect.innerHTML = `<option disabled selected>Select Item</option>`;
+            items.forEach(i => {
+                const option = document.createElement("option");
+                option.value = i.item_id;
+                option.textContent = `${i.title} (Rs. ${i.price})`;
+                itemSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load items", error);
+        });
+}
+
+  
+    let total = 0;
+let billItems = [];
+
+function calculateLineTotal() {
+    const units = parseFloat(document.getElementById("units_consumed").value) || 0;
+    const price = parseFloat(document.getElementById("price").value) || 0;
+    return units * price;
+}
+
+function addToBill() {
+    const itemId = document.getElementById("item_id").value;
+    const units = document.getElementById("units_consumed").value;
+    const price = document.getElementById("price").value;
+    const lineTotal = calculateLineTotal();
+
+    if (!itemId || !units || !price) {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    billItems.push({
+        item_id: parseInt(itemId),
+        units_consumed: parseInt(units),
+        price: parseFloat(price)
+    });
+
+    const tbody = document.getElementById("bill_body");
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${itemId}</td>
+        <td>${units}</td>
+        <td>${price}</td>
+        <td>${lineTotal.toFixed(2)}</td>
+        <td><button onclick="removeRow(this, ${lineTotal}, ${itemId})">Remove</button></td>
+    `;
+
+    tbody.appendChild(row);
+    total += lineTotal;
+    document.getElementById("total_amount").innerText = total.toFixed(2);
+
+    // Clear input fields
+    document.getElementById("item_id").value = "";
+    document.getElementById("units_consumed").value = "";
+    document.getElementById("price").value = "";
+}
+
+function removeRow(button, lineTotal, itemId) {
+    const row = button.parentNode.parentNode;
+    row.remove();
+    total -= lineTotal;
+    document.getElementById("total_amount").innerText = total.toFixed(2);
+
+    // Remove from billItems array
+    billItems = billItems.filter(item => item.item_id !== itemId);
+}
+
+async function submitBill() {
+    const customerId = document.getElementById("customer_id").value;
+
+    if (!customerId || billItems.length === 0) {
+        alert("Customer ID and at least one item required.");
+        return;
+    }
+
+    const billData = {
+        customer_id: parseInt(customerId),
+        total_amount: parseFloat(total.toFixed(2)),
+        bill_date: new Date().toISOString().slice(0, 19), // Optional if DB auto-generates
+        items: billItems
+    };
+
+    try {
+        const response = await fetch('http://localhost:8080/PahanaEdu_Bookshop/api/bills', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(billData)
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to save bill.");
+        }
+
+        alert("Bill successfully saved!");
+
+        // Reset everything
+        document.getElementById("bill_body").innerHTML = "";
+        document.getElementById("total_amount").innerText = "0.00";
+        document.getElementById("customer_id").value = "";
+        billItems = [];
+        total = 0;
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong while saving the bill.");
+    }
+}
+
+
+
+</script>
+
+</body>
+</html>
+
