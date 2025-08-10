@@ -1,7 +1,7 @@
 # 📚 Pahana Edu Billing System
 
 The **Pahana Edu Billing System** is a web-based application designed to manage the billing, inventory, and customer records for educational bookstores.  
-Built with **HTML, CSS, JavaScript, and PHP** (Apache), it integrates with a **MySQL** database for efficient and secure data handling.
+Built with **HTML, CSS, JavaScript** (Apache), it integrates with a **MySQL** database for efficient and secure data handling.
 
 ---
 
