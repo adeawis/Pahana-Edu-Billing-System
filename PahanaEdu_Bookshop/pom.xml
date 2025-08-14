@@ -60,19 +60,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
-<<<<<<< HEAD
-            <plugin>
-=======
-                 <plugin>
->>>>>>> 67b8811bc647f81da89ce2b96bae60a1f4a56443
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-              <configuration>
-                    <encoding>UTF-8</encoding>
-                    <useSystemClassLoader>true</useSystemClassLoader>
-              </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
