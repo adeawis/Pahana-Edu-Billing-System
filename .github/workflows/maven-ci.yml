@@ -1,10 +1,10 @@
-name: Pahana Edu Billing CI
+name: Maven CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: pahana_edu
         ports:
           - 3306:3306
@@ -24,37 +24,28 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+    env:
+      DB_URL: jdbc:mysql://127.0.0.1:3306/pahana_edu
+      DB_USER: root
+      DB_PASS: root
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: temurin
 
-    - name: Cache Maven packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+      - name: Wait for MySQL to start
+        run: sleep 20  # gives MySQL time to be ready
 
-    - name: Build with Maven
-      run: mvn -B package --file PahanaEdu_Bookshop/pom.xml
+      - name: Initialize database schema
+        run: |
+          mysql -h 127.0.0.1 -u $DB_USER -p$DB_PASS $MYSQL_DATABASE < sql/schema.sql
+          mysql -h 127.0.0.1 -u $DB_USER -p$DB_PASS $MYSQL_DATABASE < sql/test-data.sql
 
-    - name: Wait for MySQL
-      run: |
-        until mysqladmin ping -h "mysql" --silent; do
-          echo "Waiting for MySQL..."
-          sleep 5
-        done
-
-    - name: Run Tests
-      env:
-        DB_URL: jdbc:mysql://mysql:3306/pahana_edu
-        DB_USERNAME: root
-        DB_PASSWORD: ""
-      run: mvn -f PahanaEdu_Bookshop/pom.xml test
+      - name: Build and test with Maven
+        run: mvn clean test
