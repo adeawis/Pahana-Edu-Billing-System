@@ -24,4 +24,5 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Maven (skip tests)
+      working-directory: ./PahanaEdu_Bookshop
       run: mvn clean install -DskipTests
