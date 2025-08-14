@@ -168,6 +168,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             padding: 20px;
             border-radius: 0 0 8px 8px;
         }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 30px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .contact-info i {
+            color: purple !important;
+        }
+        
+        .purple-border {
+            border: 1px solid purple;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+
 
     </style>
 </head>
@@ -319,11 +341,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
   </div>
 </div>
 
-<div class="card mt-4 border-info">
+<div class="card mt-4 purple-border">
   <div class="card-body">
     <h5 class="card-title">
       <i class="bi bi-headset me-2"></i>Need Help? Contact Support
     </h5>
+    <div class="contact-info">
     <p class="card-text mb-1">
       <i class="bi bi-telephone-fill me-2 text-primary"></i><strong>Tele:</strong> +94 112 123 123
     </p>
@@ -331,7 +354,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
       <i class="bi bi-envelope-fill me-2 text-primary"></i><strong>Email:</strong>
       <a href="mailto:akshidealwis12@gmail.com">akshidealwis12@gmail.com</a>
     </p>
-    <a href="mailto:akshidealwis12@gmail.com" class="btn btn-outline-primary">
+    </div>
+    <a href="mailto:akshidealwis12@gmail.com" class="btn btn-primary">
       <i class="bi bi-envelope-paper me-1"></i> Send Email
     </a>
   </div>
