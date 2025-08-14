@@ -1,7 +1,7 @@
 # 📚 Pahana Edu Billing System
 
 The **Pahana Edu Billing System** is a web-based application designed to manage the billing, inventory, and customer records for educational bookstores.  
-Built with **HTML, CSS, JavaScript** (Apache), it integrates with a **MySQL** database for efficient and secure data handling.
+Built with **HTML, CSS, JavaScript, Java (Backend)** (Apache), it integrates with a **MySQL** database for efficient and secure data handling.
 
 ---
 
@@ -18,9 +18,9 @@ Built with **HTML, CSS, JavaScript** (Apache), it integrates with a **MySQL** da
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** PHP (Apache)  
-- **Database:** MySQL  
+- **Frontend:** HTML, CSS, JavaScript (Apache Maven Web Application)
+- **Backend:** Java (Apache Maven Web Application)  
+- **Database:** MySQL (Workbench 8.0)
 - **Version Control:** Git & GitHub  
 
 ---
@@ -46,11 +46,12 @@ Pahana-Edu-Billing-System/
 
 2. Set up the database:
    Import the SQL file from /database into MySQL.
-   Update database credentials in the Utils/DB_Operations.java config file.
+   Update database credentials in the Utils/DB_Operation.java config file.
    Run the project:
    Place the project in your Apache server’s htdocs folder.
    ```Start Apache and MySQL.
-   Open in browser: http://localhost/Pahana-Edu-Billing-System
+   Open in browser (backend): http://localhost:8080/PahanaEdu_Bookshop/
+   Open in browser (frontend): http://localhost:8080/PahanaEdu_FrontEnd/index.html
 
 ---
 
