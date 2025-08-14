@@ -33,7 +33,7 @@ Pahana-Edu-Billing-System/
 ├── items/ # Item management
 ├── bills/ # Billing management
 ├── images/ # CSS, JS, images
-├── database/ # SQL scripts
+├── resources/ # SQL script
 └── README.md # Project documentation
 
 ---
@@ -45,7 +45,7 @@ Pahana-Edu-Billing-System/
    git clone https://github.com/adeawis/Pahana-Edu-Billing-System.git
 
 2. Set up the database:
-   Import the SQL file from /database into MySQL.
+   Import the SQL file from src/main/resources/SQL_Schema/db_setup.sql into MySQL.
    Update database credentials in the Utils/DB_Operation.java config file.
    Run the project:
    Place the project in your Apache server’s htdocs folder.
