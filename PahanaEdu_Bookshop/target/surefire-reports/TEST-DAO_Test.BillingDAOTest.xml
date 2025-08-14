@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="DAO_Test.BillingDAOTest" time="1.363" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="DAO_Test.BillingDAOTest" time="1.766" tests="5" errors="0" skipped="0" failures="0">
   <properties>
+    <property name="netbeans.deploy" value="true"/>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
@@ -8,6 +9,7 @@
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
+    <property name="exec.appArgs" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="user.timezone" value="Asia/Colombo"/>
     <property name="os.name" value="Windows 11"/>
@@ -15,8 +17,9 @@
     <property name="user.country" value="GB"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\Javac\bin"/>
-    <property name="sun.java.command" value="C:\Users\lalit\AppData\Local\Temp\surefire11930929871867162445\surefirebooter-20250814114457950_3.jar C:\Users\lalit\AppData\Local\Temp\surefire11930929871867162445 2025-08-14T11-44-57_791-jvmRun1 surefire-20250814114457950_1tmp surefire_0-20250814114457950_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\lalit\AppData\Local\Temp\surefire1023850831580216413\surefirebooter-20250814144243695_3.jar C:\Users\lalit\AppData\Local\Temp\surefire1023850831580216413 2025-08-14T14-42-43_532-jvmRun1 surefire-20250814144243695_1tmp surefire_0-20250814144243695_2tmp"/>
     <property name="jdk.debug" value="release"/>
+    <property name="exec.vmArgs" value=""/>
     <property name="surefire.test.class.path" value="C:\my_github\PahanaEdu_Bookshop\target\test-classes;C:\my_github\PahanaEdu_Bookshop\target\classes;C:\Users\lalit\.m2\repository\jakarta\platform\jakarta.jakartaee-api\10.0.0\jakarta.jakartaee-api-10.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\el\jakarta.el-api\5.0.1\jakarta.el-api-5.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\lalit\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\lalit\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\lalit\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar;C:\Users\lalit\.m2\repository\jakarta\jms\jakarta.jms-api\3.1.0\jakarta.jms-api-3.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\mail\jakarta.mail-api\2.1.0\jakarta.mail-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\resource\jakarta.resource-api\2.1.0\jakarta.resource-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\authorization\jakarta.authorization-api\2.1.0\jakarta.authorization-api-2.1.0.jar;C:\Users\lalit\.m2\repository\jakarta\batch\jakarta.batch-api\2.1.1\jakarta.batch-api-2.1.1.jar;C:\Users\lalit\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\lalit\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\lalit\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\lalit\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\lalit\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\lalit\.m2\repository\org\mockito\mockito-core\5.18.0\mockito-core-5.18.0.jar;C:\Users\lalit\.m2\repository\net\bytebuddy\byte-buddy\1.17.5\byte-buddy-1.17.5.jar;C:\Users\lalit\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.5\byte-buddy-agent-1.17.5.jar;C:\Users\lalit\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\lalit"/>
@@ -30,7 +33,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\lalit\AppData\Local\Temp\surefire11930929871867162445\surefirebooter-20250814114457950_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\lalit\AppData\Local\Temp\surefire1023850831580216413\surefirebooter-20250814144243695_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -59,7 +62,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testCreateBill_InsufficientStock" classname="DAO_Test.BillingDAOTest" time="1.296">
+  <testcase name="testCreateBill_InsufficientStock" classname="DAO_Test.BillingDAOTest" time="1.682">
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (C:\Users\lalit\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.5\byte-buddy-agent-1.17.5.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
@@ -67,8 +70,8 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="testGetBillById_Found" classname="DAO_Test.BillingDAOTest" time="0.003"/>
-  <testcase name="testCreateBill_Success" classname="DAO_Test.BillingDAOTest" time="0.004"/>
+  <testcase name="testGetBillById_Found" classname="DAO_Test.BillingDAOTest" time="0.006"/>
+  <testcase name="testCreateBill_Success" classname="DAO_Test.BillingDAOTest" time="0.007"/>
   <testcase name="testGetAllBills_Empty" classname="DAO_Test.BillingDAOTest" time="0.002"/>
-  <testcase name="testDeleteBill_Success" classname="DAO_Test.BillingDAOTest" time="0.005"/>
+  <testcase name="testDeleteBill_Success" classname="DAO_Test.BillingDAOTest" time="0.004"/>
 </testsuite>
