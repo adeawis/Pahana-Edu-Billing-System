@@ -12,9 +12,9 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8
+        image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: pahana_edu
         ports:
           - 3306:3306
@@ -43,7 +43,7 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file PahanaEdu_Bookshop/pom.xml
 
     - name: Run Tests
       env:
